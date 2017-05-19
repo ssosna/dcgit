@@ -8,7 +8,7 @@ def gitCommit() {
 node {
     // Checkout source code from Git
     stage 'Checkout'
-    deleteDir()
+//    deleteDir()
     checkout scm
 
     // Build Docker image
