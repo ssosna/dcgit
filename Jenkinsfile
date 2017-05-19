@@ -27,4 +27,15 @@ node {
         sh "sudo docker login -u '${env.DOCKERHUB_USERNAME}' -p '${env.DOCKERHUB_PASSWORD}' -e sergio.sosna@gmail.com"
         sh "sudo docker push ssosna/dcos:${gitCommit()}"
     }
+ // Deploy
+    stage 'Deploy'
+
+    marathon(
+        url: 'http://m1.dcos:8080',
+        forceUpdate: false,
+        credentialsId: 'dcos-token',
+        filename: 'marathon.json',
+        appid: 'nginx-mesosphere',
+        docker: "ssosna/dcos:${gitCommit()}".toString()
+    )
 }
