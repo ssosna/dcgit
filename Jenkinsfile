@@ -12,7 +12,7 @@ node {
 
     // Build Docker image
     stage 'Build'
-    sh "docker build -t ssosna/dcos:${gitCommit()} ."
+    sh "sudo docker build -t ssosna/dcos:${gitCommit()} ."
 
     // Log in and push image to GitLab
     stage 'Publish'
@@ -24,7 +24,7 @@ node {
             usernameVariable: 'DOCKERHUB_USERNAME'
         ]]
     ) {
-        sh "docker login -u '${env.DOCKERHUB_USERNAME}' -p '${env.DOCKERHUB_PASSWORD}' -e sergio.sosna@gmail.com"
-        sh "docker push ssosna/dcos:${gitCommit()}"
+        sh "sudo docker login -u '${env.DOCKERHUB_USERNAME}' -p '${env.DOCKERHUB_PASSWORD}' -e sergio.sosna@gmail.com"
+        sh "sudo docker push ssosna/dcos:${gitCommit()}"
     }
 }
