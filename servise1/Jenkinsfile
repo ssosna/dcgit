@@ -8,6 +8,7 @@ def gitCommit() {
 node {
     // Checkout source code from Git
     stage 'Checkout'
+    deleteDir()
     checkout scm
 
     // Build Docker image
@@ -38,4 +39,5 @@ node {
         appid: 'nginx-mesosphere',
         docker: "ssosna/dcos:${gitCommit()}".toString()
     )
+step([$class: 'WsCleanup'])
 }
