@@ -13,8 +13,7 @@ node {
 
     // Build Docker image
     stage 'Build'
-    dir 'service1'
-    sh "sudo docker build -t ssosna/dcos:service1_${gitCommit()} ."
+    sh "sudo docker build -t ssosna/dcos:${gitCommit()} ."
 
     // Log in and push image to GitLab
     stage 'Publish'
